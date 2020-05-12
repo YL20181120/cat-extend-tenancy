@@ -1,0 +1,38 @@
+{
+    "name": "yl20181120/dcat-extend-tenancy",
+    "description": "Tenant admin",
+    "type": "library",
+    "keywords": [
+        "dcat-admin",
+        "extension",
+        "stancl/tenancy"
+    ],
+    "homepage": "https://github.com/YL20181120/cat-extend-tenancy",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jasmine2",
+            "email": "youjingqiang@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.1.0",
+        "dcat/laravel-admin": "*",
+        "stancl/tenancy": "^2.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "Yl20181120\\DcatExtendTenancy\\": "src/"
+        },
+        "files": [
+            "src/bootstrap.php"
+        ]
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Yl20181120\\DcatExtendTenancy\\DcatExtendTenancyServiceProvider"
+            ]
+        }
+    }
+}
