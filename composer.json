@@ -5,7 +5,8 @@
     "keywords": [
         "dcat-admin",
         "extension",
-        "stancl/tenancy"
+        "stancl",
+        "tenancy"
     ],
     "homepage": "https://github.com/YL20181120/cat-extend-tenancy",
     "license": "MIT",
