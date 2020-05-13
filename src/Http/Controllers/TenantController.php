@@ -24,10 +24,13 @@ class TenantController extends AdminController
     protected function grid()
     {
         return Grid::make(new Tenant(), function (Grid $grid) {
-            $grid->model()->latest();
-            $grid->id->sortable();
+            $grid->model()->with('domains')->latest();
+            $grid->column('id')->display(function () {
+                return $this->id . '@' . collect($this->domains)->pluck('domain')->join(';');
+            });
             $grid->name;
-
+            $grid->expired_at;
+            $grid->created_at;
             $grid->filter(function (Grid\Filter $filter) {
                 $filter->equal('id');
                 $filter->like('name');
@@ -47,6 +50,7 @@ class TenantController extends AdminController
         return Show::make($id, new Tenant(), function (Show $show) {
             $show->id;
             $show->name;
+            $show->expired_at;
             $show->domains(function ($model) {
                 $grid = new Grid(new Domain);
                 $grid->model()->where('tenant_id', $model->id);

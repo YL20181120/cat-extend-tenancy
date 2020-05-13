@@ -13,12 +13,9 @@ class Tenant extends Model
 
     protected $keyType = 'string';
 
-    protected $dates = [
-        'expired_at'
-    ];
-
     protected $casts = [
-        'data' => 'json'
+        'data' => 'json',
+        'expired_at' => 'datetime:Y-m-d'
     ];
 
     /**

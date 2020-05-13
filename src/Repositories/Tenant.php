@@ -34,15 +34,30 @@ class Tenant extends EloquentRepository
     public function update(Form $form)
     {
         /* @var EloquentModel $builder */
-        $model = $this->eloquent();
+        $model  = $this->eloquent();
+        $tenant = tenancy()->find($form->getKey());
         if (\request()->has('domain')) {
             $domain = parse_url(\request('domain'));
-            $tenant = tenancy()->find($model->id);
             $tenant->addDomains([$domain['host']])
                 ->with('created_at', $model->created_at)
                 ->with('updated_at', \now())
                 ->save();
         }
+        /* @var EloquentModel $builder */
+        $model = $this->eloquent();
+
+        if (!$model->getKey()) {
+            $model->exists = true;
+
+            $model->setAttribute($model->getKeyName(), $form->getKey());
+        }
+
+        $result  = null;
+        $updates = $form->updates();
+        foreach ($updates as $column => $value) {
+            $tenant->with($column, $value);
+        }
+        $tenant->save();
         return 1;
     }
 

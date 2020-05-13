@@ -40,7 +40,8 @@ class DcatExtendTenancyServiceProvider extends ServiceProvider
                 'name',
                 'expired_at',
                 'created_at',
-                'updated_at'
+                'updated_at',
+                'deleted_at'
             ]
         ]);
         $this->bootEvents();
